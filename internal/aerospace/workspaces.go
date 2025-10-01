@@ -81,3 +81,19 @@ func ListWorkspacesAndMonitors() ([]Workspace, []Monitor, error) {
 
 	return workspaces, monitors, nil
 }
+
+// SwitchWorkspace switches to a specific workspace by name
+func SwitchWorkspace(workspaceName string) error {
+	cmd := exec.Command("aerospace", "workspace", workspaceName)
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return fmt.Errorf("failed to switch to workspace %s: %w (output: %s)", workspaceName, err, string(output))
+	}
+
+	// If there's any output, something likely went wrong
+	if len(output) > 0 {
+		return fmt.Errorf("unexpected output while switching to workspace %s: %s", workspaceName, string(output))
+	}
+
+	return nil
+}
