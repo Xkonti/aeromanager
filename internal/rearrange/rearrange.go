@@ -21,7 +21,7 @@ func Execute() error {
 	switch len(monitors) {
 	case 1:
 		// Single monitor - no rearrangement needed
-		fmt.Println("Single monitor detected - no rearrangement needed")
+		aerospace.SwitchWorkspace("A")
 		return nil
 
 	case 2:
@@ -78,6 +78,9 @@ func rearrangeTwoMonitors(workspaces []aerospace.Workspace, monitors []aerospace
 			}
 		}
 	}
+
+	aerospace.SwitchWorkspace("A")
+	aerospace.SwitchWorkspace("L1")
 
 	return nil
 }
@@ -136,6 +139,10 @@ func rearrangeThreeMonitors(workspaces []aerospace.Workspace, monitors []aerospa
 			}
 		}
 	}
+
+	aerospace.SwitchWorkspace("A")
+	aerospace.SwitchWorkspace("L1")
+	aerospace.SwitchWorkspace("R1")
 
 	return nil
 }
