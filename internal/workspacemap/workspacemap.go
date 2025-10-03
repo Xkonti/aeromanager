@@ -37,7 +37,7 @@ func mapForSingleMonitor(num int) string {
 }
 
 // mapForTwoMonitors maps workspace numbers for 2-monitor setup
-// Built-in: 1-5 -> A-E, 6-0 -> F-J
+// Built-in: 1-5 -> B1-B5, 6-0 wraps to B1-B5
 // External: 1-5 -> L1-L5, 6-0 -> R1-R5
 func mapForTwoMonitors(num int, targetMonitorID int, monitors []aerospace.Monitor) string {
 	// Find if the target is the built-in monitor
@@ -50,15 +50,15 @@ func mapForTwoMonitors(num int, targetMonitorID int, monitors []aerospace.Monito
 	}
 
 	if isBuiltIn {
-		// Built-in monitor: 1-5 -> A-E, 6-0 -> F-J
+		// Built-in monitor: 1-5 -> B1-B5, 6-0 wraps to B1-B5
 		if num >= 1 && num <= 5 {
-			return string(rune('A' + num - 1))
+			return fmt.Sprintf("B%d", num)
 		}
-		// 6-0 maps to F-J
+		// 6-0 wraps to B1-B5
 		if num == 0 {
-			return "J"
+			return "B5"
 		}
-		return string(rune('F' + num - 6))
+		return fmt.Sprintf("B%d", num-5)
 	}
 
 	// External monitor: same as single monitor
@@ -66,9 +66,9 @@ func mapForTwoMonitors(num int, targetMonitorID int, monitors []aerospace.Monito
 }
 
 // mapForThreeMonitors maps workspace numbers for 3-monitor setup
-// Built-in: 1-5 -> A-E, 6-0 -> F-J
-// Left external: 1-5 -> L1-L5, 6-0 -> L1-L5 (wraps around, but typically just 1-5)
-// Right external: 1-5 -> R1-R5, 6-0 -> R1-R5 (wraps around, but typically just 1-5)
+// Built-in: 1-5 -> B1-B5, 6-0 wraps to B1-B5
+// Left external: 1-5 -> L1-L5, 6-0 wraps to L1-L5
+// Right external: 1-5 -> R1-R5, 6-0 wraps to R1-R5
 func mapForThreeMonitors(num int, targetMonitorID int, monitors []aerospace.Monitor) string {
 	// Find the monitor type
 	var builtInID int
@@ -95,14 +95,14 @@ func mapForThreeMonitors(num int, targetMonitorID int, monitors []aerospace.Moni
 
 	// Map based on which monitor the target is
 	if targetMonitorID == builtInID {
-		// Built-in monitor: 1-5 -> A-E, 6-0 -> F-J
+		// Built-in monitor: 1-5 -> B1-B5, 6-0 wraps to B1-B5
 		if num >= 1 && num <= 5 {
-			return string(rune('A' + num - 1))
+			return fmt.Sprintf("B%d", num)
 		}
 		if num == 0 {
-			return "J"
+			return "B5"
 		}
-		return string(rune('F' + num - 6))
+		return fmt.Sprintf("B%d", num-5)
 	} else if targetMonitorID == leftExternalID {
 		// Left external: 1-5 -> L1-L5, 6-0 wraps to L1-L5
 		if num >= 1 && num <= 5 {

@@ -21,7 +21,7 @@ func Execute() error {
 	switch len(monitors) {
 	case 1:
 		// Single monitor - no rearrangement needed
-		aerospace.SwitchWorkspace("A")
+		aerospace.SwitchWorkspace("B1")
 		return nil
 
 	case 2:
@@ -36,7 +36,7 @@ func Execute() error {
 }
 
 // rearrangeTwoMonitors handles the 2-monitor setup:
-// Built-in monitor gets A-L workspaces, the other gets L1-L5 and R1-R5
+// Built-in monitor gets B1-B5 workspaces, the other gets L1-L5 and R1-R5
 func rearrangeTwoMonitors(workspaces []aerospace.Workspace, monitors []aerospace.Monitor) error {
 	// Find the built-in monitor
 	var builtInID int
@@ -60,8 +60,8 @@ func rearrangeTwoMonitors(workspaces []aerospace.Workspace, monitors []aerospace
 	for _, ws := range workspaces {
 		var targetMonitor int
 
-		// A-L go to built-in, L1-L5 and R1-R5 go to external
-		if ws.Name >= "A" && ws.Name <= "L" {
+		// B1-B5 go to built-in, L1-L5 and R1-R5 go to external
+		if (ws.Name >= "B1" && ws.Name <= "B5") {
 			targetMonitor = builtInID
 		} else if (ws.Name >= "L1" && ws.Name <= "L5") || (ws.Name >= "R1" && ws.Name <= "R5") {
 			targetMonitor = externalID
@@ -79,14 +79,14 @@ func rearrangeTwoMonitors(workspaces []aerospace.Workspace, monitors []aerospace
 		}
 	}
 
-	aerospace.SwitchWorkspace("A")
+	aerospace.SwitchWorkspace("B1")
 	aerospace.SwitchWorkspace("L1")
 
 	return nil
 }
 
 // rearrangeThreeMonitors handles the 3-monitor setup:
-// Built-in gets A-L, left external (smaller ID) gets L1-L5, right external gets R1-R5
+// Built-in gets B1-B5, left external (smaller ID) gets L1-L5, right external gets R1-R5
 func rearrangeThreeMonitors(workspaces []aerospace.Workspace, monitors []aerospace.Monitor) error {
 	// Find built-in and external monitors
 	var builtInID int
@@ -119,8 +119,8 @@ func rearrangeThreeMonitors(workspaces []aerospace.Workspace, monitors []aerospa
 	for _, ws := range workspaces {
 		var targetMonitor int
 
-		// A-L go to built-in, L1-L5 go to left external, R1-R5 go to right external
-		if ws.Name >= "A" && ws.Name <= "L" {
+		// B1-B5 go to built-in, L1-L5 go to left external, R1-R5 go to right external
+		if ws.Name >= "B1" && ws.Name <= "B5" {
 			targetMonitor = builtInID
 		} else if ws.Name >= "L1" && ws.Name <= "L5" {
 			targetMonitor = leftExternalID
@@ -140,7 +140,7 @@ func rearrangeThreeMonitors(workspaces []aerospace.Workspace, monitors []aerospa
 		}
 	}
 
-	aerospace.SwitchWorkspace("A")
+	aerospace.SwitchWorkspace("B1")
 	aerospace.SwitchWorkspace("L1")
 	aerospace.SwitchWorkspace("R1")
 

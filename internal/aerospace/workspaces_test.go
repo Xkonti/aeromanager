@@ -12,21 +12,21 @@ func TestListWorkspacesAndMonitors(t *testing.T) {
 
 	// Expected workspaces based on the example output
 	expectedWorkspaces := []Workspace{
-		{Name: "0", IsFocused: false, IsVisible: false, MonitorID: 3, MonitorName: "XZ272U P (1)"},
-		{Name: "1", IsFocused: true, IsVisible: true, MonitorID: 1, MonitorName: "XZ272U P (2)"},
-		{Name: "2", IsFocused: false, IsVisible: false, MonitorID: 1, MonitorName: "XZ272U P (2)"},
-		{Name: "3", IsFocused: false, IsVisible: false, MonitorID: 1, MonitorName: "XZ272U P (2)"},
-		{Name: "4", IsFocused: false, IsVisible: false, MonitorID: 1, MonitorName: "XZ272U P (2)"},
-		{Name: "5", IsFocused: false, IsVisible: false, MonitorID: 1, MonitorName: "XZ272U P (2)"},
-		{Name: "6", IsFocused: false, IsVisible: false, MonitorID: 1, MonitorName: "XZ272U P (2)"},
-		{Name: "7", IsFocused: false, IsVisible: false, MonitorID: 3, MonitorName: "XZ272U P (1)"},
-		{Name: "8", IsFocused: false, IsVisible: true, MonitorID: 3, MonitorName: "XZ272U P (1)"},
-		{Name: "9", IsFocused: false, IsVisible: false, MonitorID: 3, MonitorName: "XZ272U P (1)"},
-		{Name: "A", IsFocused: false, IsVisible: true, MonitorID: 2, MonitorName: "Built-in Retina Display"},
-		{Name: "B", IsFocused: false, IsVisible: false, MonitorID: 2, MonitorName: "Built-in Retina Display"},
-		{Name: "C", IsFocused: false, IsVisible: false, MonitorID: 2, MonitorName: "Built-in Retina Display"},
-		{Name: "D", IsFocused: false, IsVisible: false, MonitorID: 2, MonitorName: "Built-in Retina Display"},
-		{Name: "E", IsFocused: false, IsVisible: false, MonitorID: 2, MonitorName: "Built-in Retina Display"},
+		{Name: "L1", IsFocused: true, IsVisible: true, MonitorID: 1, MonitorName: "XZ272U P (2)"},
+		{Name: "L2", IsFocused: false, IsVisible: false, MonitorID: 1, MonitorName: "XZ272U P (2)"},
+		{Name: "L3", IsFocused: false, IsVisible: false, MonitorID: 1, MonitorName: "XZ272U P (2)"},
+		{Name: "L4", IsFocused: false, IsVisible: false, MonitorID: 1, MonitorName: "XZ272U P (2)"},
+		{Name: "L5", IsFocused: false, IsVisible: false, MonitorID: 1, MonitorName: "XZ272U P (2)"},
+		{Name: "B1", IsFocused: false, IsVisible: true, MonitorID: 2, MonitorName: "Built-in Retina Display"},
+		{Name: "B2", IsFocused: false, IsVisible: false, MonitorID: 2, MonitorName: "Built-in Retina Display"},
+		{Name: "B3", IsFocused: false, IsVisible: false, MonitorID: 2, MonitorName: "Built-in Retina Display"},
+		{Name: "B4", IsFocused: false, IsVisible: false, MonitorID: 2, MonitorName: "Built-in Retina Display"},
+		{Name: "B5", IsFocused: false, IsVisible: false, MonitorID: 2, MonitorName: "Built-in Retina Display"},
+		{Name: "R1", IsFocused: false, IsVisible: true, MonitorID: 3, MonitorName: "XZ272U P (1)"},
+		{Name: "R2", IsFocused: false, IsVisible: false, MonitorID: 3, MonitorName: "XZ272U P (1)"},
+		{Name: "R3", IsFocused: false, IsVisible: false, MonitorID: 3, MonitorName: "XZ272U P (1)"},
+		{Name: "R4", IsFocused: false, IsVisible: false, MonitorID: 3, MonitorName: "XZ272U P (1)"},
+		{Name: "R5", IsFocused: false, IsVisible: false, MonitorID: 3, MonitorName: "XZ272U P (1)"},
 	}
 
 	// Expected monitors extracted from workspace data
