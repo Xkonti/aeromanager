@@ -54,9 +54,16 @@ func Execute(workspaceNum int) error {
 	}
 
 	// Move the focused window to the target workspace
-	// We don't use focus-follows-window because the user might want to keep working
-	// on the current workspace after moving a window
-	return aerospace.MoveNodeToWorkspace(targetWorkspace, false)
+	if err := aerospace.MoveNodeToWorkspace(targetWorkspace, false); err != nil {
+		return fmt.Errorf("failed to move window to workspace %s: %w", targetWorkspace, err)
+	}
+
+	// Switch to the target workspace to keep the window focused and ready for work
+	if err := aerospace.SwitchWorkspace(targetWorkspace); err != nil {
+		return fmt.Errorf("failed to switch to workspace %s: %w", targetWorkspace, err)
+	}
+
+	return nil
 }
 
 // findVisibleWorkspaceOnMonitor finds the visible workspace on a specific monitor
