@@ -5,6 +5,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/Xkonti/aeromanager/internal/hyprmove"
 	"github.com/Xkonti/aeromanager/internal/hyprworkspace"
 	"github.com/Xkonti/aeromanager/internal/rearrange"
 )
@@ -15,6 +16,7 @@ func main() {
 		fmt.Println("Commands:")
 		fmt.Println("  rearrange            - Rearrange workspaces based on monitor setup")
 		fmt.Println("  hyprworkspace <num>  - Switch workspace based on cursor position (num: 1-5 or 6-0)")
+		fmt.Println("  hyprmove [num]       - Move focused window to workspace on mouse monitor (num: 1-5 or 6-0, or omit for visible workspace)")
 		os.Exit(1)
 	}
 
@@ -37,6 +39,24 @@ func main() {
 			os.Exit(1)
 		}
 		if err := hyprworkspace.Execute(workspaceNum); err != nil {
+			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+			os.Exit(1)
+		}
+	case "hyprmove":
+		var workspaceNum int
+		if len(os.Args) < 3 {
+			// No workspace number provided, use -1 to indicate moving to visible workspace
+			workspaceNum = -1
+		} else {
+			// Parse the workspace number
+			var err error
+			workspaceNum, err = strconv.Atoi(os.Args[2])
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "Error: invalid workspace number: %s\n", os.Args[2])
+				os.Exit(1)
+			}
+		}
+		if err := hyprmove.Execute(workspaceNum); err != nil {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 			os.Exit(1)
 		}
